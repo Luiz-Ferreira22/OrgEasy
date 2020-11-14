@@ -4,7 +4,6 @@ export default StyleSheet.create({
   info: {
     flexDirection: 'row',
     borderRadius: 15,
-    marginTop: 130,
   },
   home: {
     borderRadius: 15,

@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 326px;
-  height: 48px;
+  padding: 0 15px;
+  height: 46px;
   background: #fff;
   border-radius: 8px;
   flex-direction: row;
@@ -14,6 +14,7 @@ export const TInput = styled.TextInput.attrs({
   placeholderTextColor: '#000',
 
 })`
+  flex: 1;
   font-size: 15px;
   margin-left: 4px;
 `;

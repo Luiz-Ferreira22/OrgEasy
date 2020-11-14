@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../../services/api';
 
 import styles from './styles';
 
@@ -10,7 +11,7 @@ export default function DashboardInfo() {
     <View style={styles.info}>
           <TouchableOpacity style={styles.home}>
             <Icon name={"person"} size={30} color={"#FF0000"} />
-            <Text style={styles.convidado}> Convidados </Text>
+            <Text style={styles.convidado}>Convidados</Text>
             <Text style={styles.qtd}> 125 </Text>
           </TouchableOpacity>
 

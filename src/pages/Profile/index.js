@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Background from '../../components/Background';
 
 import { signOut } from '../../store/modules/auth/actions';
 import { updateProfileRequest } from '../../store/modules/user/actions';
 
-
+import AvatarInput from './AvatarInput';
 
 import {
   Container,
@@ -60,9 +58,8 @@ export default function Profile (){
   return (
     <Background>
       <Container >
-        <Title>Meu Perfil</Title>
-
-       <Form>
+        <AvatarInput name="avatar"/>
+       <Form initialData={profile}>
        <FormInput
           icon="person-outline"
           autoCorrect={false}
@@ -119,12 +116,6 @@ export default function Profile (){
   )
 }
 
-Profile.navigationOptions = {
-  tabBarLabel: 'Perfil',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="person" size={20} color={tintColor} />
-    )
-  };
 
 
 

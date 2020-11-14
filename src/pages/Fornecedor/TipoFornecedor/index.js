@@ -1,30 +1,71 @@
-import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../../services/api';
 
+import { useNavigation } from '@react-navigation/native';
 
+import ListProvider from '../../../components/ListProvider';
 
-import styles from './styles';
+import { Container,
+Title,
+Search,
+FormSearch,
+List,
+FormList,
+FomrIcon
+} from './styles'
 
-export default function TipoFornecedor ({ navigation }) {
+export default function TipoFornecedor () {
 
+  const navigation = useNavigation();
+  const [providers, setProviders] = useState([]);
+
+  useEffect(() => {
+    async function loadProviders() {
+      const response = await api.get('providers');
+
+      setProviders(response.data);
+    }
+
+    loadProviders();
+
+  }, []);
+
+  const onReturn = () => {
+    navigation.goBack();
+  };
 
   return (
-    <View style={styles.container}>
+      <Container>
 
-      <Text style={styles.title}>Org Easy</Text>
+        <TouchableOpacity onPress={onReturn}>
+          <Icon name="arrow-back" size={30} color={'#f04'}/>
+        </TouchableOpacity>
 
-        <ScrollView style={styles.Scroll}>
+          <Title>Fornecedores</Title>
+        <FormSearch>
+          <FomrIcon>
+            <Icon name="location-on" size={20} color={'#F04'}/>
+          </FomrIcon>
 
-          <View style={styles.teste}>
-            <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigete('ListFornecedor')}
-
+          <Search
+            placeholder="Pesquisar nova cidade"
             >
-            </TouchableOpacity>
+          </Search>
+        </FormSearch>
 
-            </View>
-           </ScrollView>
-      </View>
+        <FormList>
+          <List
+            data={providers}
+            keyExtractor={item => String(item)}
+            renderItem={({ item }) =>
+            <ListProvider data={item}
+            />
+            }
+          />
+          </FormList>
+      </Container>
 
     )
 };

@@ -32,15 +32,19 @@ export default function SignIn ({ navigation }) {
   const [ufs, setUfs] = useState(['']);
   const [citys, setCitys] = useState(['']);
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [selectedUf, setSelectedUf] = useState();
-  const [selectedCity, setSelectedCity] = useState();
-  const [selectedUsuario, setSelectedUsuario] = useState();
+  const [selectedUf, setSelectedUf] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedUsuario, setSelectedUsuario] = useState('');
 
   const loading = useSelector(state => state.auth.loading);
+
+  const payload = useSelector(state => state.auth.paylaod);
+
+
 
   // pega todas as uf da api ibge
   useEffect(() => {
@@ -69,13 +73,6 @@ export default function SignIn ({ navigation }) {
     });
   }, [selectedUf]);
 
-
-  function handleSelectUf(event) {
-  const uf = event;
-
-  selectedUf(uf)
-  };
-
   function handleSubmit() {
     dispatch(signUpRequest(
       name,
@@ -87,6 +84,15 @@ export default function SignIn ({ navigation }) {
       ));
   };
 
+  useEffect(() => {
+      setName(''),
+      setEmail(''),
+      setPassword(''),
+      setSelectedUf(''),
+      setSelectedCity(''),
+      setSelectedUsuario('')
+  }, [payload]);
+
   return (
     <Background >
      <Container>
@@ -97,7 +103,7 @@ export default function SignIn ({ navigation }) {
       <FormInput
           icon="person-outline"
           autoCorrect={false}
-          autoCapitalize="none" // Não adicona letras maisculas
+          //autoCapitalize="none" // Não adicona letras maisculas
           placeholder="Digite seu nome"
           value={name}
           onChangeText={setName}

@@ -6,13 +6,13 @@ import api from '../../../services/api';
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
-  console.tron.log('Update Profile Payload', payload);
+  console.tron.log('UPLOAD', payload);
 
   try {
-    const { name, email, ...rest } = payload.data;
+    const { name, email, file_id,...rest } = payload.data;
 
     const profile = Object.assign(
-      { name, email },
+      { name, email,  file_id },
       rest.oldPassword ? rest: {}
     );
 

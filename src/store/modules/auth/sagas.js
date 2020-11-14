@@ -8,21 +8,21 @@ import { signInSuccess,signFailure } from './actions';
   // funcao para fazer o login autenticação
 export function* signIn({ payload }) {
   try {
-    const { email, password} = payload;
+    const { email, password, tipo_usuario} = payload;
 
     const response = yield call(api.post, 'sessions', {
     email,
     password,
+    tipo_usuario,
   });
 
     const { token, user } = response.data;
 
+    console.tron.log('DADOS', user);
+
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
-
-
-
 
   } catch (err) {
     Alert.alert(
@@ -39,7 +39,7 @@ export function* signIn({ payload }) {
 export function* signUp({ payload }) {
   try {
     const { name, email, password, uf, city, tipo_usuario } = payload;
-    console.log.tron('CHEGUEI', payload);
+    console.tron.log('CHEGUEI', payload);
 
       yield call(api.post, 'users', {
       name,
@@ -55,6 +55,7 @@ export function* signUp({ payload }) {
     );
 
   }catch (err) {
+
     Alert.alert(
       'Falha no cadastro',
       'Houve um erro no cadastro, verifique seus dados'
