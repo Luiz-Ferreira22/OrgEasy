@@ -13,31 +13,44 @@ export default function Fornecedor () {
 
       <Text style={styles.title}>Org Easy</Text>
 
-        <ScrollView style={styles.Scroll}>
+        <ScrollView
+        style={styles.Scroll}>
 
           <View style={styles.teste}>
-            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor')} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Recepção'
+            })} style={styles.button}>
               <Text style={styles.description}>Recepção</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Buffet'
+            })} style={styles.button}>
               <Text style={styles.description}>Buffet</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Fotografo'
+            })} style={styles.button}>
               <Text style={styles.description}>Fotografo</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Videos'
+            })} style={styles.button}>
               <Text style={styles.description}>Videos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Musicos'
+            })} style={styles.button}>
               <Text style={styles.description}>Musicos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.description}>Carros</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('TipoFornecedor', {
+              ramo:'Automoveis'
+            })} style={styles.button}>
+              <Text style={styles.description}>Automoveis</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button}>
@@ -82,8 +95,5 @@ export default function Fornecedor () {
               </View>
            </ScrollView>
       </View>
-
-
-
   )
 };

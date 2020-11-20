@@ -1,26 +1,21 @@
 import React from 'react';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Background from '../../components/Background';
 
 import OptionButton from './OptionButton';
 
+import { Container, Form, Title}  from './styles';
+
 export default function Convidados (){
   return (
     <Background>
-      <OptionButton />
+      <Container>
+        <Form>
+          <Title>Meus Convidados</Title>
+        </Form>
+
+        <OptionButton />
+      </Container>
     </Background>
   )
-}
-
-Convidados.navigationOptions = {
-  tabBarLabel: 'Convidados',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="favorite" size={20} color={tintColor} />
-    )
-
-  };
-
-
-
+};

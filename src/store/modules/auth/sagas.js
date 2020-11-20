@@ -3,7 +3,7 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import api from '../../../services/api';
 
-import { signInSuccess,signFailure } from './actions';
+import { signInSuccess, signFailure } from './actions';
 
   // funcao para fazer o login autenticação
 export function* signIn({ payload }) {
@@ -18,11 +18,15 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
+    const tipoUsuario = user.tipo_usuario;
+
+    const provider = tipoUsuario !== 'Organizador' ? true: false;
+
     console.tron.log('DADOS', user);
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    yield put(signInSuccess(token, user));
+    yield put(signInSuccess(token, user, provider));
 
   } catch (err) {
     Alert.alert(
@@ -34,13 +38,10 @@ export function* signIn({ payload }) {
 
 }
 
-
 // funcao para criar um usaurio
 export function* signUp({ payload }) {
   try {
     const { name, email, password, uf, city, tipo_usuario } = payload;
-    console.tron.log('CHEGUEI', payload);
-
       yield call(api.post, 'users', {
       name,
       email,
@@ -53,6 +54,35 @@ export function* signUp({ payload }) {
     Alert.alert(
       'Cadastrado com Sucesso',
     );
+
+  }catch (err) {
+
+    Alert.alert(
+      'Falha no cadastro',
+      'Houve um erro no cadastro, verifique seus dados'
+    );
+    yield put(signFailure());
+  }
+}
+
+//Cadastrar empresa
+export function* signEmpresa({ payload }) {
+  console.tron.log('SignEmpresa', payload);
+  try {
+    const { name, cnpj, tel, ramo, uf, city } = payload;
+     yield call(api.post, 'providers', {
+      name,
+      cnpj,
+      tel,
+      ramo,
+      uf,
+      city,
+    });
+
+    Alert.alert(
+      'Cadastrado com Sucesso',
+    );
+
 
   }catch (err) {
 
@@ -78,6 +108,8 @@ export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn), // chama uma funcao toda vez que ouvir
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('@auth/SIGN_UP_EMPRESA', signEmpresa),
+
 
 ]);
 

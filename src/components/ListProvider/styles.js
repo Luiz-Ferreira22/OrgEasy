@@ -47,3 +47,21 @@ export const Description = styled.Text`
   color: #A6A6A6 ;
 
 `;
+
+export const FormCity = styled.View`
+  margin-left: 7px;
+`;
+
+export const City = styled.Text`
+  font-size: 16px;
+  color: #A6A6A6 ;
+`;
+
+export const FormPreco = styled.View`
+  margin-left: 10px;
+`;
+
+export const Preco = styled.Text`
+  font-size: 16px;
+  color: #A6A6A6 ;
+`;

@@ -1,7 +1,19 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
+`;
+
+export const FormDescription = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: 10px;
+  `;
+
+  export const Voltar = styled.Text`
+  margin-left: 10px;
+  color: #f04;
 `;
 
 export const FormSearch = styled.View`
@@ -21,13 +33,21 @@ export const Search = styled.TextInput`
 
 `;
 
+export const Title = styled.Text`
+    color: #fff;
+    font-size: 20px;
+    font-family: bold;
+    justify-content: center;
+    align-self: center;
+  `;
+
 export const FomrIcon = styled.View`
   padding: 6px;
 `;
 
 export const FormList = styled.View`
   border-radius: 10px;
-  background-color: #ecf0f1;
+  background-color: rgba(255, 255, 255, 0.0);
 
 `;
 
@@ -38,14 +58,86 @@ export const List = styled.FlatList.attrs({
   margin-top: 10px;
 `;
 
-export const Title = styled.Text`
-  color: #fff;
-  font-size: 20px;
-  font-family: bold;
-  justify-content: center;
-  align-self: center;
+export const ListProvider = styled(RectButton)`
+ margin-top: 0px;
 `;
 
+export const Avatar = styled.Image`
+  margin-top: 30px;
+  border-radius: 5px;
+  max-width: 100%;
+  height: 200px;
+`;
+
+export const FormName = styled.View`
+  margin-left: 8px;
+  margin-top: 5px;
+  flex-direction: row;
+`;
+
+export const Empresa = styled.Text`
+  font-size: 16px;
+  font-family: bold;
+  color: #fff;
+`;
+export const FormCity = styled.View`
+  flex-direction: row;
+  margin-left: 8px;
+  margin-top: 5px;
+`;
+
+export const City = styled.Text`
+  font-size: 16px;
+  color: #fff;
+  margin-left: 3px;
+`;
+
+export const Uf = styled.Text`
+  color: #fff;
+  font-size: 16px;
+`;
+
+
+export const FormIcon = styled.View`
+  margin-top: 1px;
+`;
+
+export const FormRamo = styled.View`
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: 5px;
+`;
+
+export const Ramo = styled.Text`
+  color: #fff;
+  font-size: 16px;
+`;
+
+
+export const FormPreco = styled.View`
+  margin-top: 5px;
+  margin-left: 5px;
+
+`;
+
+export const Preco = styled.Text`
+  color: #fff;
+  font-size: 16px;
+  font-family: bold;
+
+
+`;
+
+export const Bio = styled.View`
+  margin-top: 5px;
+  margin-left: 5px;
+
+`;
+export const Description = styled.Text`
+  color: #fff;
+  font-size: 14px;
+  font-family: bold;
+`;
 
 
 

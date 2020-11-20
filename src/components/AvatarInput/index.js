@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import api from '../../../services/api';
+import api from '../../services/api';
 import { useSelector } from 'react-redux';
 
 import ImagePicker from 'react-native-image-picker';
 
-
-// import { Container } from './styles';
-
 export default function AvatarInput() {
+
   const profile = useSelector(state => state.user.profile);
 
-  const [preview, setPreview] = useState(profile.file_id);
+  const [preview, setPreview] = useState(profile.profile_id);
 
   const imagePickerOptions = {
     title: 'Selecione uma Opção',
@@ -37,15 +35,13 @@ export default function AvatarInput() {
     const data = new FormData();
 
     data.append('files', {
-      name: 'name',
-      path: 'path',
+      id: 'name',
+      url: 'path',
     });
 
     const response = await api.post('files', data);
 
     const {id, url} = response.data;
-
-    console.log.tron(IMAGEM);
 
     setPreview(id);
     setFile(url);
@@ -65,7 +61,7 @@ export default function AvatarInput() {
             source={{
               uri: preview
                 ? preview.uri
-                : 'https://media.istockphoto.com/vectors/icon-camera-photo-logo-design-universal-business-social-media-pixel-vector-id998587472',
+                : 'https://i.pinimg.com/originals/bb/35/61/bb3561121f9fa38ddfaff7d5958a2edb.jpg',
             }}
           />
         </View>
@@ -79,8 +75,8 @@ export default function AvatarInput() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 80,
-    flex: 1,
+    padding: 20,
+    marginBottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#fff',
+
   },
   Salvar: {
     padding: 15,

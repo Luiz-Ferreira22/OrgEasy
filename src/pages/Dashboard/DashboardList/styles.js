@@ -9,6 +9,7 @@ export default StyleSheet.create({
     borderTopLeftRadius: 15,
   },
   scroll: {
+
     marginTop: 3,
     marginHorizontal: 5,
   },

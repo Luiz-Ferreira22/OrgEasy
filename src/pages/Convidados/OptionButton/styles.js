@@ -1,42 +1,38 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
+export const Container = styled.View`
+  flex: 1;
+`;
 
-  },
-  viewTitle: {
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    color: '#fff',
-    padding: 15,
-    justifyContent: 'center',
+export const Form = styled.View`
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 30px;
+`;
 
-  },
-  viewButton: {
-    flex: 1,
-    marginTop: 10,
-    padding: 8,
-    backgroundColor: '#fff',
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-    flexDirection: 'row',
-  },
-  button: {
-    borderWidth: 0.1,
-    borderColor: '#f03',
-    borderRadius: 15,
-    marginRight: 4,
-    marginLeft: 4,
-    width: 160,
-    height: 60,
+export const Title = styled.Text`
+  color: #fff;
 
-  },
-  text: {
-    fontSize: 20,
-    padding: 12,
-    alignSelf: 'center',
-  }
-});
+`;
+
+export const Button = styled.TouchableOpacity`
+
+
+`;
+
+export const Description = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  width: 190px;
+  height: 60px;
+
+
+`;
+
+export const Name = styled.Text`
+  margin-left: 10px;
+  color: #fff;
+`;

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Background from '../../components/Background';
+import Background from '../../../components/Background';
 
-import { signOut } from '../../store/modules/auth/actions';
-import { updateProfileRequest } from '../../store/modules/user/actions';
+import { signOut } from '../../../store/modules/auth/actions';
+import { updateProfileRequest } from '../../../store/modules/user/actions';
 
-import AvatarInput from './AvatarInput';
+import AvatarInput from '../../../components/AvatarInput';
 
 import {
   Container,
-  Title,
   Separator,
   Form,
   FormInput,

@@ -1,25 +1,37 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
+
+import Background from '../../../components/Background';
+
+import {
+  Container,
+  Form,
+  Button,
+  Description,
+  Name
+  }  from './styles';
 
 export default function OptionButton () {
   return (
-    <View style={styles.container}>
-      <View style={styles.viewTitle}>
-        <Text style={styles.title}>Meus Convidados</Text>
-      </View>
-        <View style={styles.viewButton}>
-          <TouchableOpacity style={styles.button}
-          >
-            <Text style={styles.text}>Convidados</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Mesas</Text>
-          </TouchableOpacity>
-        </View>
-
-    </View>
+   <Background>
+    <Container>
+      <Form>
+        <Button>
+          <Description>
+            <Feather name="plus-square" size={20} color={'#f04'} />
+            <Name>Adicionar Convidados</Name>
+          </Description>
+        </Button>
+        <Button>
+          <Description>
+            <Feather name="plus-square" size={20} color={'#f04'} />
+            <Name>Adicionar Convidados</Name>
+          </Description>
+        </Button>
+      </Form>
+    </Container>
+   </Background>
   )
-}
+};

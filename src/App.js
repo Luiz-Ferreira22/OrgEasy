@@ -8,7 +8,7 @@ import './config/ReactotronConfig';
 
 import { store, persistor } from './store';
 
-import Routes from './routes/user.routes';
+import Routes from './routes';
 
 const App = () => {
   return (

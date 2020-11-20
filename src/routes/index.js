@@ -1,15 +1,19 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 
-import AuthRoutes from './routes/auth.routes';
-import UserRoutes from './routes/user.routes'
+import AuthRoutes from './auth.routes';
+import UserRoutes from './user.routes'
+import ProviderRoutes from './provider.routes';
 
 const Routes = () => {
 
-  const {signed} = useSelector((state) => state.auth.signed);
+  const { signed, provider } = useSelector((state) => state.auth);
 
-  return signed ? <AuthRoutes /> : <UserRoutes />;
+  if(!signed) {
+    return <AuthRoutes />;
+  }
 
+  return signed && provider ? <ProviderRoutes /> : <UserRoutes />;
 }
 
 export default Routes;

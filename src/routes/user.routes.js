@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Convidados from '../pages/Convidados';
 import Dashboard from '../pages/Dashboard';
-import Profile from '../pages/Profile';
+import Profile from '../pages/User/Profile';
 import Fornecedor from '../pages/Fornecedor';
 import TipoFornecedor from '../pages/Fornecedor/TipoFornecedor';
 import PerfilFornecedor from '../pages/Fornecedor/PerfilFornecedor';
@@ -45,7 +45,6 @@ const UserRoutes = () => {
 
         },
       }}
-
       >
       <User.Screen name="Dashboard" component={Dashboard}
         options={{

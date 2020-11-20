@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Logo, Avatar, FormSelect, FormName, FormCity, Name, Bio, Description,  } from './styles';
+import { Container, Logo, Avatar, FormSelect, FormName, FormCity, FormPreco, Preco, Qtd, Name, Bio, Description, City  } from './styles';
 
-export default function ListProvider () {
+export default function ListProvider ({ data }) {
+
   const navigation = useNavigation();
 
   return (
@@ -15,12 +16,8 @@ export default function ListProvider () {
         <TouchableOpacity
         onPress={() => navigation.navigate('PerfilFornecedor')}
         >
-          <Avatar
-          source={{
-            uri:
-            'https://img.stpu.com.br/?img=https://s3.amazonaws.com/pu-mgr/default/a0RG000000ldanaMAA/57a87e9be4b00dab3a056b14.jpg&w=710&h=462&f=webp',
-            }}
-          />
+
+
         </TouchableOpacity>
       </Logo>
 
@@ -32,8 +29,18 @@ export default function ListProvider () {
         </FormSelect>
 
         <FormName>
-          <Name> Luiz Ferreira - DJ  </Name>
+          <Name>{data.name}</Name>
         </FormName>
+
+        <FormCity>
+          <City>{data.ramo}</City>
+        </FormCity>
+
+        <FormPreco>
+          <Preco>
+            A Partir de R$: 200,00
+          </Preco>
+        </FormPreco>
 
         <Bio>
           <Description>
