@@ -77,7 +77,7 @@ export default function HomeProvider () {
             keyExtractor={fornecedor => Object(fornecedor.id)}
             renderItem={({ item: fornecedor }) => (
               <Button onPress={() =>
-                navigation.navigate('ProviderProfile')} >
+                navigation.navigate('DadosEmpresa')} >
               <Image
               source={{
                uri:'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg',

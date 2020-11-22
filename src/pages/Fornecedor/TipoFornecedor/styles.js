@@ -33,6 +33,17 @@ export const Search = styled.TextInput`
 
 `;
 
+export const FormPicker = styled.View`
+  font-weight: bold;
+  width: 300px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-top: 10px;
+  justify-content: center;
+
+`;
+
 export const Title = styled.Text`
     color: #fff;
     font-size: 20px;

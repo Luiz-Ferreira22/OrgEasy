@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 import Convidados from '../pages/Convidados';
+import AddConvidados from '../pages/Convidados/AddConvidados';
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/User/Profile';
 import Fornecedor from '../pages/Fornecedor';
@@ -15,6 +16,9 @@ import PerfilFornecedor from '../pages/Fornecedor/PerfilFornecedor';
 const User = createBottomTabNavigator();
 
 const Prov = createStackNavigator();
+
+const Conv = createStackNavigator();
+
 
 function Provider () {
   return (
@@ -29,6 +33,20 @@ function Provider () {
       <Prov.Screen name="PerfilFornecedor" component={PerfilFornecedor} />
 
     </Prov.Navigator>
+  )
+};
+
+function Seila () {
+  return (
+    <Conv.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyle: { backgroundColor: '#000'}
+      }}
+    >
+      <Conv.Screen name="Convidados" component={Convidados} />
+      <Conv.Screen name="AddConvidados" component={AddConvidados}/>
+    </Conv.Navigator>
   )
 }
 
@@ -65,7 +83,7 @@ const UserRoutes = () => {
 
        />
 
-      <User.Screen name="Convidados" component={Convidados}
+      <User.Screen name="Convidados" component={Seila}
       options={{
         tabBarLabel: 'Convidados',
         tabBarIcon: ({ color }) => (

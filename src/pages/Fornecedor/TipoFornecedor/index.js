@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -13,6 +14,7 @@ FormDescription,
 Voltar,
 Title,
 Search,
+FormPicker,
 FormSearch,
 List,
 FormList,
@@ -37,8 +39,22 @@ export default function TipoFornecedor () {
 
   const navigation = useNavigation();
   const { params } = useRoute();
+  const [providersAll, setProvidersAll] = useState([]);
+
   const [providers, setProviders] = useState([]);
   const [buscaCity, setBuscaCity] = useState([]);
+
+  const [cityList, setCityList] = useState([]);
+  const [currentCity, setCurrentCity] = useState([]);
+
+  useEffect(() => {
+
+    const ListProviders = providersAll.filter(item => item.city === currentCity);
+    console.log(currentCity);
+
+    setProviders(ListProviders);
+
+  },[currentCity]);
 
   useEffect(() => {
     if(params) {
@@ -51,6 +67,20 @@ export default function TipoFornecedor () {
         const listRamos = data.filter(item => item.ramo === ramo);
 
         setProviders(listRamos);
+      })
+
+      api.get('providers').then(response => {
+        const { data } = response;
+
+        const listCityAll = data.map(item => item.city);
+
+        const listCity = listCityAll.filter((city, index, self ) => {
+
+          return self.indexOf(city) == index;
+        })
+
+        setProvidersAll(data);
+        setCityList(listCity);
       })
     }
   },
@@ -85,21 +115,28 @@ export default function TipoFornecedor () {
         </FormDescription>
 
           <Title>Fornecedores</Title>
-        <FormSearch>
-          <FomrIcon>
-            <Icon name="location-on" size={20} color={'#F04'}/>
-          </FomrIcon>
 
-          <Search
-            placeholder="Pesquisar nova cidade"
-            onChangeText={setBuscaCity}
-            >
-          </Search>
-        </FormSearch>
+         <FormPicker>
+          <Picker
+            style={{color: '#fff'}}
+            mode="dropdown"
+            selectedValue={currentCity}
+            onValueChange={itemValue => setCurrentCity(itemValue)}
+          >
+            <Picker.Item label="Busca por Cidade" />
+            {cityList.map((nameCity) =>(
+              <Picker.item
+              label={nameCity}
+              value={nameCity}
+              key={nameCity}
+              />
+            ))}
+          </Picker>
+     </FormPicker>
 
         <FormList>
           <List
-            data={buscaCity}
+            data={providers}
             keyExtractor={provider => Object(provider.id)}
             renderItem={({ item: provider }) => (
               <ListProvider onPress={() =>

@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import api from '../../services/api';
-import { useSelector } from 'react-redux';
 
 import ImagePicker from 'react-native-image-picker';
 
 export default function AvatarInput() {
 
-  const profile = useSelector(state => state.user.profile);
+  // const profile = useSelector(state => state.user.profile);
 
-  const [preview, setPreview] = useState(profile.profile_id);
+  const [avatar, setAvatar] = useState();
 
   const imagePickerOptions = {
     title: 'Selecione uma Opção',
@@ -28,24 +27,29 @@ export default function AvatarInput() {
       return;
     }
 
-    setPreview(data); // sempre que o usuario escolher uma foto, mas pode alterar
+    setAvatar(data); // sempre que o usuario escolher uma foto, mas pode alterar
   }
 
-  async function UploadImage(e) {
+  async function UploadImage() {
+    try {
+
     const data = new FormData();
 
-    data.append('files', {
-      id: 'name',
-      url: 'path',
-    });
+     data.append('files', avatar);
 
     const response = await api.post('files', data);
 
-    const {id, url} = response.data;
+    const {uri} = response.data;
 
-    setPreview(id);
-    setFile(url);
+    setAvatar(uri);
+
+      }catch(err){
+          console.log(err);
+        }
   }
+
+  console.log(avatar);
+
 
   return (
     <View style={styles.container}>
@@ -56,12 +60,11 @@ export default function AvatarInput() {
         }>
         <View>
           <Image
-            id="avatar"
             style={styles.avatar}
             source={{
-              uri: preview
-                ? preview.uri
-                : 'https://i.pinimg.com/originals/bb/35/61/bb3561121f9fa38ddfaff7d5958a2edb.jpg',
+              uri: avatar
+              ? avatar.uri
+              : 'https://i.pinimg.com/originals/bb/35/61/bb3561121f9fa38ddfaff7d5958a2edb.jpg',
             }}
           />
         </View>

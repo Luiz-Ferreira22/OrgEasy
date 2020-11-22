@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import  { Picker } from '@react-native-community/picker';
-
-import axios from 'axios';
 
 import Background from '../../../components/Background';
 
@@ -15,65 +13,29 @@ import {
   FormInput,
   SubmitButton,
   FormPicker,
-  ViewPicker,
-  FormPickerUf,
-  FormPickerCity
+
   } from './styles';
 
 export default function AddConvidados (){
 
   const dispatch = useDispatch();
 
-  const ramo = ["Buffet", "Automoveis", "Hoteis"];
-
-  const [ufs, setUfs] = useState(['']);
-  const [citys, setCitys] = useState(['']);
+  const tipo = ['Confirmado', 'Nao Confirmado'];
 
   const [name, setName] = useState('');
-  const [cnpj, setCnpj] = useState('');
+  const [sobreNome, setSobreNome] = useState('');
   const [tel, setTelefone] = useState('');
+  const [confirma, setConfirma] = useState('');
 
-
-  const [selectedRamo, setSeletedRamo] = useState('');
-  const [selectedUf, setSelectedUf] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-
-   // pega todas as uf da api ibge
-   useEffect(() => {
-    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
-    .then(response => {
-      const ufNames = response.data.map(uf => uf.sigla);
-
-      setUfs(ufNames);
-
-    });
-  }, []);
-
-  useEffect(() => {
-    // carregar as cidades toda vez que selecionar uma uf
-    if(selectedUf === '0') {
-      return;
-    }
-
-    axios.get
-    (`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
-    .then(response => {
-      const citysNames = response.data.map(citys => citys.nome);
-
-      setCitys(citysNames);
-
-    });
-  }, [selectedUf]);
+  const [selectedConf, setSelectedConf] = useState('');
 
   // Funcao para alterar dados
   function handleSubmit() {
     dispatch(signUpEmpresa(
       name,
-      cnpj,
+      sobreNome,
       tel,
-      selectedRamo,
-      selectedUf,
-      selectedCity
+      confirma,
       ));
   };
 
@@ -81,14 +43,14 @@ export default function AddConvidados (){
     <Background>
       <Container >
 
-      <Title>Cadastrar Empresa</Title>
+      <Title>Cadastrar Mesa</Title>
 
       <Form>
        <FormInput
           icon="person-outline"
           autoCorrect={false}
           autoCapitalize="none" // Não adicona letras maisculas
-          placeholder="Nome da Empresa"
+          placeholder="Nome"
           returnKeyType="next" // adiciona um campo de next no teclado
           value={name}
           onChangeText={setName}
@@ -96,9 +58,9 @@ export default function AddConvidados (){
 
           <FormInput
           icon="lock-outline"
-          placeholder="CNPJ"
-          value={cnpj}
-          onChangeText={setCnpj}
+          placeholder="Sobre Nome"
+          value={sobreNome}
+          onChangeText={setSobreNome}
           />
 
           <FormInput
@@ -112,62 +74,22 @@ export default function AddConvidados (){
           <Picker
             style={{color: '#000'}}
             mode="dropdown"
-            selectedValue={selectedRamo}
+            selectedValue={selectedConf}
             onValueChange={(itemValue, intemIndex) =>
               setSeletedRamo(itemValue)}
             >
-            <Picker.Item label="Escolha o ramo" value=""/>
-            {Object.keys(ramo).map((key) => {
+            <Picker.Item label="Cofirmar Presença" value=""/>
+            {Object.keys(tipo).map((key) => {
               return (
                 <Picker.Item
-                label={ramo[key]}
-                value={ramo[key]}
+                label={tipo[key]}
+                value={tipo[key]}
                 key={key} />)
               })}
             </Picker>
           </FormPicker>
 
-          <ViewPicker>
-        <FormPickerUf>
-          <Picker
-            style={{color: '#000'}}
-            mode="dropdown"
-            selectedValue={selectedUf}
-            onValueChange={(itemValue, itemIndex) =>
-            setSelectedUf(itemValue)}
-              >
-              <Picker.Item label="UF"/>
-            {Object.keys(ufs).map((key) => {
-              return (
-                <Picker.Item
-                label={ufs[key]}
-                value={ufs[key]}
-                key={key}/>)
-               })}
-          </Picker>
-        </FormPickerUf>
-
-        <FormPickerCity>
-        <Picker
-            style={{color: '#000'}}
-            mode="dropdown"
-            selectedValue={selectedCity}
-            onValueChange={(itemValue, itemIndex) =>
-            setSelectedCity(itemValue)}
-              >
-              <Picker.Item label="Cidade"/>
-            {Object.keys(citys).map((key) => {
-              return (
-                <Picker.Item
-                label={citys[key]}
-                value={citys[key]}
-                key={key} />)
-               })}
-          </Picker>
-        </FormPickerCity>
-        </ViewPicker>
-
-          <SubmitButton onPress={handleSubmit}>Cadastrar Empresa</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Cadastrar Mesa</SubmitButton>
 
           </Form>
 

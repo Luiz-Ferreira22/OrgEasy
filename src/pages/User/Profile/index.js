@@ -58,7 +58,7 @@ export default function Profile (){
     <Background>
       <Container >
         <AvatarInput name="avatar"/>
-       <Form initialData={profile}>
+       <Form>
        <FormInput
           icon="person-outline"
           autoCorrect={false}
