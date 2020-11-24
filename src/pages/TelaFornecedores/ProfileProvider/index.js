@@ -17,7 +17,7 @@ import {
   LogoutButton,
   } from './styles';
 
-export default function Profile (){
+export default function ProfileProvider (){
 
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);

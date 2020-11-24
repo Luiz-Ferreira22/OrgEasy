@@ -37,8 +37,10 @@ Description,
 
 export default function TipoFornecedor () {
 
-  const navigation = useNavigation();
   const { params } = useRoute();
+
+  const navigation = useNavigation();
+
   const [providersAll, setProvidersAll] = useState([]);
 
   const [providers, setProviders] = useState([]);
@@ -142,6 +144,7 @@ export default function TipoFornecedor () {
               <ListProvider onPress={() =>
                 navigation.navigate('PerfilFornecedor', {provider})}
               >
+
               <Avatar
              source={{
               uri:'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg',

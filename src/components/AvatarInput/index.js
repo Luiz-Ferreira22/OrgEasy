@@ -32,22 +32,22 @@ export default function AvatarInput() {
 
   async function UploadImage() {
     try {
+      const data = new FormData();
+      const infoImage = {
+        name: avatar.fileName,
+        type: avatar.type,
+        uri: avatar.uri,
+      }
+      data.append('file', infoImage);
 
-    const data = new FormData();
+     const response = await api.post('add-avatar', data);
+     console.log(response);
+     console.log('DEU BOM',response);
 
-     data.append('files', avatar);
-
-    const response = await api.post('files', data);
-
-    const {uri} = response.data;
-
-    setAvatar(uri);
-
-      }catch(err){
-          console.log(err);
-        }
+  }catch(err){
+    console.log('Deu ruim', err);
+    }
   }
-
   console.log(avatar);
 
 

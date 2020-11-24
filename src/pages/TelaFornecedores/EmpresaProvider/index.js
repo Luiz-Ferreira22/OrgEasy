@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import  { Picker } from '@react-native-community/picker';
+import { useNavigation } from '@react-navigation/native';
 
 import axios from 'axios';
 
@@ -21,6 +22,7 @@ import {
   } from './styles';
 
 export default function EmpresaProvider (){
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
 
@@ -167,7 +169,7 @@ export default function EmpresaProvider (){
         </FormPickerCity>
         </ViewPicker>
 
-          <SubmitButton onPress={handleSubmit}>Cadastrar Empresa</SubmitButton>
+          <SubmitButton onPress={() => navigation.navigate ('ProfileProvider')}>Cadastrar Empresa</SubmitButton>
 
           </Form>
 

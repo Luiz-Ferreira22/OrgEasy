@@ -4,28 +4,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import HomeProvider from '../pages/Provider/HomeProvider';
-import ProfileProvider from '../pages/Provider/ProfileProvider';
-import EmpresaProvider from '../pages/Provider/EmpresaProvider';
-import DadosEmpresa from '../pages/Provider/DadosEmpresa';
+import HomeProvider from '../pages/TelaFornecedores/HomeProvider';
+import ProfileProvider from '../pages/TelaFornecedores/ProfileProvider';
+import EmpresaProvider from '../pages/TelaFornecedores/EmpresaProvider';
+import InfoEmpresa from '../pages/TelaFornecedores/InfoEmpresa';
 
 const Provider = createBottomTabNavigator();
-const Perfil = createStackNavigator();
 
-function Dados () {
+const Conv = createStackNavigator();
+
+const Teste = () => {
   return (
-    <Perfil.Navigator
+    <Conv.Navigator
       screenOptions={{
         headerShown: false,
         cardStyle: { backgroundColor: '#000'}
       }}
     >
-      <Perfil.Screen name="Home" component={HomeProvider} />
-      <Perfil.Screen name="Profile" component={DadosEmpresa} />
+      <Conv.Screen name="HomeProvider" component={HomeProvider} />
+      <Conv.Screen name="InfoEmpresa" component={InfoEmpresa}/>
 
-    </Perfil.Navigator>
+    </Conv.Navigator>
   )
-}
+};
+
 
 const ProviderRoutes = () => {
   return (
@@ -40,7 +42,7 @@ const ProviderRoutes = () => {
       }}
 
       >
-      <Provider.Screen name="Home" component={Dados}
+      <Provider.Screen name="Home" component={Teste}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="home" size={20} color={color}/>

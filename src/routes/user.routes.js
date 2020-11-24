@@ -4,9 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-
 import Convidados from '../pages/Convidados';
 import AddConvidados from '../pages/Convidados/AddConvidados';
+import AddMesas from '../pages/Convidados/AddMesas';
+import ListaConvidados from '../pages/Convidados/ListaConvidados';
+
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/User/Profile';
 import Fornecedor from '../pages/Fornecedor';
@@ -46,6 +48,9 @@ function Seila () {
     >
       <Conv.Screen name="Convidados" component={Convidados} />
       <Conv.Screen name="AddConvidados" component={AddConvidados}/>
+      <Conv.Screen name="AddMesas" component={AddMesas}/>
+      <Conv.Screen name="ListaConvidados" component={ListaConvidados}/>
+
     </Conv.Navigator>
   )
 }

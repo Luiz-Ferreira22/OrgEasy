@@ -32,7 +32,7 @@ ButtonFavorite,
 Add,
 } from './styles'
 
-export default function TipoFornecedor ({route}) {
+export default function TipoFornecedor () {
 
     const { provider } = route.params;
 

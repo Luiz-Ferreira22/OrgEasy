@@ -25,13 +25,15 @@ export default function OptionButton () {
                 navigation.navigate('AddConvidados')}>
           <Description>
             <Feather name="plus-square" size={20} color={'#f04'} />
-            <Name>Adicionar Convidados</Name>
+            <Name>Adicionar Convidado</Name>
           </Description>
         </Button>
-        <Button>
+
+        <Button onPress={() =>
+                navigation.navigate('AddMesas')}>
           <Description>
             <Feather name="plus-square" size={20} color={'#f04'} />
-            <Name>Adicionar Convidados</Name>
+            <Name>Adicionar Mesa</Name>
           </Description>
         </Button>
       </Form>
