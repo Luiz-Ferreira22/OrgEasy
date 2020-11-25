@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import wpp from '../../../assets/icon/Whatsapp1.png';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Container,
 FormVoltar,
@@ -32,18 +32,18 @@ ButtonFavorite,
 Add,
 } from './styles'
 
-export default function TipoFornecedor () {
+export default function TipoFornecedor ({route}) {
 
     const { provider } = route.params;
 
   const navigation = useNavigation();
 
   function sendWhatsapp() {
-    Linking.openURL(`whatsapp://send?phone='5514997340344'&text=Testando`);
+    Linking.openURL(`whatsapp://send?phone=${provider.tel}`);
 }
 
 function sendPhone() {
-  Linking.openURL('tel:');
+  Linking.openURL(`tel:${provider.tel}`);
 }
 
   const onReturn = () => {

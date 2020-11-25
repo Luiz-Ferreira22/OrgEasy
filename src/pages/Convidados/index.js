@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 
 import Background from '../../components/Background';
@@ -19,7 +18,8 @@ import {
   Name,
   FormName,
   IconDesc,
-
+  Desc,
+  FormDesc,
 
   }  from './styles';
 
@@ -56,18 +56,17 @@ export default function Convidados (){
             renderItem={({ item: mesa }) => (
               <Button onPress={() =>
                 navigation.navigate('ListaConvidados', {mesa})}>
-                <FormName>
-                  <IconDesc>
-                    <Feather name="hash" size={16} color={'#f04'}/>
-                  </IconDesc>
-                <Name> - Mesa {mesa.name}</Name>
-                <Name> - {mesa.cadeiras} Cadeiras </Name>
 
+                <FormName>
+                <Name> Mesa - {mesa.name}</Name>
                </FormName>
+
+                <FormDesc>
+                  <Desc> {mesa.cadeiras} Cadeiras </Desc>
+                </FormDesc>
               </Button>
               )}
             >
-
             </ScrollView>
           </FormList>
 

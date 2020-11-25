@@ -28,15 +28,16 @@ export const IconDesc = styled.View`
 
 export const FormList = styled.View`
   height: 530px;
-  display: flex;
+  flex-direction: column;
 `;
+
+
 
 export const ScrollView = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false, // indicador lateral
   contentContainerStyle: { padding: 0 } // conteudo da lista
 })`
   background-color: #000;
-
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -50,15 +51,29 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const FormName = styled.View`
+  justify-content: center;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 15px;
   margin-left: 10px;
   flex-direction: row;
 `;
 
 export const Name = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: #000;
 `;
+
+export const FormDesc = styled.View`
+  margin-left: 11px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Desc = styled.Text`
+  font-size: 16px;
+
+  color: #000;
+`;
+
 

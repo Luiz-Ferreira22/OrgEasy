@@ -1,7 +1,10 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 
+import api from '../../../services/api';
 
 import Background from '../../../components/Background';
 
@@ -15,19 +18,43 @@ FormTitle,
 Name,
 Description,
 Form,
-
+ScrollView,
+Image,
+FormName,
+Empresa,
+FormCity,
+City,
+Uf,
+FormCel,
+Cel,
+FormRamo,
+Ramo,
+FormIcon,
 } from './styles';
 
 export default function HomeProvider () {
 
   const navigation = useNavigation();
+  const { params } = useRoute();
+
+  const [fornecedor, setFornecedor] = useState();
+
+  useEffect(() => {
+    async function loadProviders() {
+
+      const response = await api.get('providers');
+
+      setFornecedor(response.data)
+    }
+    loadProviders();
+
+ },[]);
 
   return (
   <Background>
     <Container>
       <FormAvatar>
-          <Button onPress={() =>
-                 navigation.navigate("InfoEmpresa")}>
+          <Button >
           <Avatar
           source={{
             uri:
@@ -42,16 +69,62 @@ export default function HomeProvider () {
         </FormAvatar>
 
         <Form>
-              <ListProvider onPress={() =>
-                 navigation.navigate('InfoEmpresa')}
-                >
-                  <FormTitle>
-          <Name>Luiz - </Name>
-          <Description>Fornecedor</Description>
-        </FormTitle>
-           </ListProvider>
+          <ScrollView
+            horizontal={true}
+            data={fornecedor}
+            keyExtractor={fornecedor => Object(fornecedor.id)}
+            renderItem={({ item: fornecedor }) => (
+              <Button onPress={() =>
+                navigation.navigate('InfoEmpresa', {fornecedor})} >
+              <Image
+              source={{
+               uri:'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg',
+              }}
+               >
+            </Image>
 
+               <FormName>
+                 <Icon name="domain" size={20} color={'#E0FF00'}/>
+                <Empresa> - {fornecedor.name}</Empresa>
+               </FormName>
 
+               <FormCity>
+                 <Icon name="place" size={20} color={'#f04'}></Icon>
+                <City> - {fornecedor.city}</City>
+                  <Uf> - {fornecedor.uf}</Uf>
+               </FormCity>
+
+             <FormCel>
+               <Icon name="call" size={20} color='#0A24F9'></Icon>
+                <Cel> - {fornecedor.tel}</Cel>
+             </FormCel>
+
+             <FormRamo>
+               <FormIcon>
+                 <Feather name="award" size={20} color='#fff'></Feather>
+                 </FormIcon>
+            <Ramo> - {fornecedor.ramo}</Ramo>
+             </FormRamo>
+
+             <FormRamo>
+               <FormIcon>
+                 <Feather name="dollar-sign" size={22} color='#00FF0F'></Feather>
+                 </FormIcon>
+               <Ramo> - Serviço 120,00 </Ramo>
+             </FormRamo>
+
+             <FormRamo>
+               <FormIcon>
+                 <Feather name="activity" size={22} color='#00FFEC'></Feather>
+                 </FormIcon>
+            <Ramo> - CNPJ - {fornecedor.cnpj}</Ramo>
+             </FormRamo>
+
+           </Button>
+            )}
+          >
+
+          </ScrollView>
         </Form>
 
     </Container>
