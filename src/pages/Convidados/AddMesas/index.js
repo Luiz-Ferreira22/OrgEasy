@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '../../../components/Background';
 
-import { signUpEmpresa } from '../../../store/modules/auth/actions';
+import { signUpMesa } from '../../../store/modules/auth/actions';
 
 import {
   Container,
@@ -29,29 +29,22 @@ export default function AddConvidados (){
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const tipo = ['Confirmado', 'Nao Confirmado'];
+  const lugares = ["4", "6", "8", "10"];
 
   const [name, setName] = useState('');
-  const [sobreNome, setSobreNome] = useState('');
-  const [tel, setTelefone] = useState('');
-  const [confirma, setConfirma] = useState('');
-
-  const [selectedConf, setSelectedConf] = useState('');
+  const [cadeiras, setSelectedCadeiras] = useState('');
 
   // Funcao para alterar dados
   function handleSubmit() {
-    dispatch(signUpEmpresa(
+    dispatch(signUpMesa(
       name,
-      sobreNome,
-      tel,
-      confirma,
+      cadeiras,
       ));
   };
 
   const onReturn = () => {
     navigation.goBack();
   };
-
 
   return (
     <Background>
@@ -64,7 +57,7 @@ export default function AddConvidados (){
           <Voltar onPress={onReturn}>Voltar</Voltar>
         </FormDescription>
 
-      <Title>Adicionar Convidado</Title>
+      <Title>Adicionar Mesa</Title>
 
       <Form>
        <FormInput
@@ -77,34 +70,21 @@ export default function AddConvidados (){
           onChangeText={setName}
         />
 
-          <FormInput
-          icon="lock-outline"
-          placeholder="Sobre Nome"
-          value={sobreNome}
-          onChangeText={setSobreNome}
-          />
-
-          <FormInput
-          icon="call"
-          placeholder="Telefone"
-          value={tel}
-          onChangeText={setTelefone}
-          />
 
         <FormPicker>
           <Picker
             style={{color: '#000'}}
             mode="dropdown"
-            selectedValue={selectedConf}
+            selectedValue={cadeiras}
             onValueChange={(itemValue, intemIndex) =>
-              setSeletedRamo(itemValue)}
+              setSelectedCadeiras(itemValue)}
             >
-            <Picker.Item label="Cofirmar Presença" value=""/>
-            {Object.keys(tipo).map((key) => {
+            <Picker.Item label="Quantidade de Acentos" value=""/>
+            {Object.keys(lugares).map((key) => {
               return (
                 <Picker.Item
-                label={tipo[key]}
-                value={tipo[key]}
+                label={lugares[key]}
+                value={lugares[key]}
                 key={key} />)
               })}
             </Picker>

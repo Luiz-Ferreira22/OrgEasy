@@ -22,6 +22,9 @@ import {
   } from './styles';
 
 export default function EmpresaProvider (){
+
+  const profile = useSelector(state => state.user.profile);
+
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -79,6 +82,17 @@ export default function EmpresaProvider (){
       ));
   };
 
+  useEffect(() => {
+    setName(''),
+    setCnpj(''),
+    setTelefone(''),
+    setSeletedRamo(''),
+    setSelectedUf(''),
+    setSelectedCity('')
+}, [profile]);
+
+
+
   return (
     <Background>
       <Container >
@@ -118,7 +132,7 @@ export default function EmpresaProvider (){
             onValueChange={(itemValue, intemIndex) =>
               setSeletedRamo(itemValue)}
             >
-            <Picker.Item label="Escolha o ramo" value=""/>
+            <Picker.Item label="Ramo de atividade" value=""/>
             {Object.keys(ramo).map((key) => {
               return (
                 <Picker.Item
@@ -169,7 +183,7 @@ export default function EmpresaProvider (){
         </FormPickerCity>
         </ViewPicker>
 
-          <SubmitButton onPress={() => navigation.navigate ('ProfileProvider')}>Cadastrar Empresa</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Cadastrar Empresa</SubmitButton>
 
           </Form>
 

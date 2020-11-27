@@ -6,11 +6,10 @@ import Button from '../../../components/Button';
 
 export const Container = styled.View`
   flex: 1;
-
 `;
 
 export const Title = styled.Text`
-  padding: 20px;
+   margin-top: 30px;
   font-size: 20px;
   color: #fff;
   font-weight: bold;
@@ -37,6 +36,10 @@ export const Form = styled.ScrollView.attrs({
 
 export const FormInput = styled(Input)`
   margin-bottom: 10px;
+`;
+
+export const FormTeste = styled.View`
+  margin-top: 50px;
 `;
 
 export const FormPicker = styled.View`

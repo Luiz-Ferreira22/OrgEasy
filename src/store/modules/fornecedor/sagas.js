@@ -9,14 +9,14 @@ export function* updateProfile({ payload }) {
   console.tron.log('UPLOAD', payload);
 
   try {
-    const { name, email, file_id,...rest } = payload.data;
+    const { name, cnpj, ramo } = payload.data;
 
     const profile = Object.assign(
-      { name, email,  file_id },
-      rest.oldPassword ? rest: {}
+      { name, cnpj, ramo },
+
     );
 
-    const response = yield call(api.put, 'users', profile);
+    const response = yield call(api.put, 'providers', profile);
 
     console.tron.log('Update Profile Resultado', payload);
 

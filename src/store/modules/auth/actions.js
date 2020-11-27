@@ -29,6 +29,22 @@ export function signUpEmpresa(name, cnpj, tel, ramo, uf, city) {
   };
 }
 
+export function signUpMesa(name, cadeiras ) {
+  console.tron.log('SignUpMesa', name, cadeiras );
+  return {
+    type:'@auth/SIGN_UP_MESA',
+    payload: { name, cadeiras},
+  };
+}
+
+export function signUpConvidado(name, sobre_nome ) {
+  console.tron.log('SignUpConvidado', name, sobre_nome );
+  return {
+    type:'@auth/SIGN_UP_CONVIDADO',
+    payload: { name, sobre_nome},
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_FAILURE',

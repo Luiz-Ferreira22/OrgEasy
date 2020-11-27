@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { TouchableOpacity, Linking, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 
 import wpp from '../../../assets/icon/Whatsapp1.png';
+
+import api from '../../../services/api';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -36,6 +38,8 @@ export default function TipoFornecedor ({route}) {
 
     const { provider } = route.params;
 
+  const [file, setFile] = useState('');
+
   const navigation = useNavigation();
 
   function sendWhatsapp() {
@@ -49,6 +53,16 @@ function sendPhone() {
   const onReturn = () => {
     navigation.goBack();
   };
+
+  useEffect(() => {
+    async function loadFile() {
+
+      const response = await api.get('users');
+      setFile(response.data);
+    }
+    loadFile();
+
+ },[file]);
 
   return (
     <Container>
@@ -71,7 +85,7 @@ function sendPhone() {
           <Avatar
           source={{
             uri:
-            'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg'
+           'https://i.pinimg.com/236x/a1/97/da/a197da41e229b0d38b9b856dff6b8518--camera-icon-camera-logo.jpg',
           }}
           />
           </TouchableOpacity>
@@ -123,7 +137,7 @@ function sendPhone() {
           </ButtonWhats>
 
           <ButtonFavorite
-            onPress={sendWhatsapp}>
+            >
             <Icon name="star" size={35} color='#f04'></Icon>
             <Add>Favoritos</Add>
           </ButtonFavorite>

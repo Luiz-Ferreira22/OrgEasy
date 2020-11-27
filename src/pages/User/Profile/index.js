@@ -57,7 +57,7 @@ export default function Profile (){
   return (
     <Background>
       <Container >
-        <AvatarInput name="avatar"/>
+        <AvatarInput />
        <Form>
        <FormInput
           icon="person-outline"

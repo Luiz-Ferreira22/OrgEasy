@@ -1,26 +1,39 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Background from '../../components/Background';
 
 import { useSelector } from 'react-redux';
 
+import api from '../../services/api';
+
 import DashboardInfo from './DashboardInfo';
 import DashboardList from './DashboardList';
 
 import styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
 
 export default function Dashboard (){
 
   const profile = useSelector(state => state.user.profile);
 
-  const [preview, setPreview] = useState();
+  // const [preview, setPreview] = useState();
 
   const navigation = useNavigation();
 
+
+  const [file, setFile] = useState('');
+
+  useEffect(() => {
+    async function loadFile() {
+
+      const response = await api.get('users');
+      setFile(response.data);
+    }
+    loadFile();
+
+ },[file]);
 
   return (
    <Background>
@@ -28,12 +41,11 @@ export default function Dashboard (){
       <View style={styles.image}>
        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
        <Image
-            id="avatar"
             style={styles.avatar}
             source={{
-              uri: preview
-              ? preview.uri
-              : 'https://i.pinimg.com/originals/bb/35/61/bb3561121f9fa38ddfaff7d5958a2edb.jpg',
+              uri: file
+              ? file.avatar.url :
+             'https://i.pinimg.com/236x/a1/97/da/a197da41e229b0d38b9b856dff6b8518--camera-icon-camera-logo.jpg',
             }}
             />
             </TouchableOpacity>

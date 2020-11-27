@@ -13,7 +13,7 @@ const Routes = () => {
     return <AuthRoutes />;
   }
 
-  return signed && provider ? <ProviderRoutes /> : <UserRoutes />;
+  return signed && provider ? <UserRoutes /> : <ProviderRoutes />;
 }
 
 export default Routes;

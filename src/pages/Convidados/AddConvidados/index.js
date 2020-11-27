@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useDispatch } from 'react-redux';
 import  { Picker } from '@react-native-community/picker';
 
+import api from '../../../services/api';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '../../../components/Background';
 
-import { signUpEmpresa } from '../../../store/modules/auth/actions';
+import { signUpConvidado } from '../../../store/modules/auth/actions';
 
 import {
   Container,
@@ -21,6 +23,7 @@ import {
   FormDescription,
   Button,
   Voltar,
+  FormTeste,
 
   } from './styles';
 
@@ -29,29 +32,22 @@ export default function AddConvidados (){
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const tipo = ['Confirmado', 'Nao Confirmado'];
-
   const [name, setName] = useState('');
-  const [sobreNome, setSobreNome] = useState('');
-  const [tel, setTelefone] = useState('');
-  const [confirma, setConfirma] = useState('');
+  const [sobre_nome, setSobreNome] = useState('');
 
-  const [selectedConf, setSelectedConf] = useState('');
+  const [mesas, setMesa] = useState(['']);
 
   // Funcao para alterar dados
   function handleSubmit() {
-    dispatch(signUpEmpresa(
+    dispatch(signUpConvidado(
       name,
-      sobreNome,
-      tel,
-      confirma,
+      sobre_nome,
       ));
   };
 
   const onReturn = () => {
     navigation.goBack();
   };
-
 
   return (
     <Background>
@@ -66,6 +62,8 @@ export default function AddConvidados (){
 
       <Title>Adicionar Convidado</Title>
 
+    <FormTeste>
+
       <Form>
        <FormInput
           icon="person-outline"
@@ -75,45 +73,21 @@ export default function AddConvidados (){
           returnKeyType="next" // adiciona um campo de next no teclado
           value={name}
           onChangeText={setName}
-        />
+          />
 
           <FormInput
-          icon="lock-outline"
+          icon="person-outline"
           placeholder="Sobre Nome"
-          value={sobreNome}
+          value={sobre_nome}
           onChangeText={setSobreNome}
           />
 
-          <FormInput
-          icon="call"
-          placeholder="Telefone"
-          value={tel}
-          onChangeText={setTelefone}
-          />
 
-        <FormPicker>
-          <Picker
-            style={{color: '#000'}}
-            mode="dropdown"
-            selectedValue={selectedConf}
-            onValueChange={(itemValue, intemIndex) =>
-              setSeletedRamo(itemValue)}
-            >
-            <Picker.Item label="Cofirmar Presença" value=""/>
-            {Object.keys(tipo).map((key) => {
-              return (
-                <Picker.Item
-                label={tipo[key]}
-                value={tipo[key]}
-                key={key} />)
-              })}
-            </Picker>
-          </FormPicker>
-
-          <SubmitButton onPress={handleSubmit}>Cadastrar Mesa</SubmitButton>
+          <SubmitButton onPress={handleSubmit}> Adicionar Convidado</SubmitButton>
 
           </Form>
 
+          </FormTeste>
 
       </Container>
     </Background>

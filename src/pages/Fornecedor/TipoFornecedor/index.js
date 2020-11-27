@@ -153,7 +153,7 @@ export default function TipoFornecedor () {
 
            <FormName>
               <Icon name="domain" size={20} color={'#E0FF00'}/>
-            <Empresa>{provider.name}</Empresa>
+            <Empresa> - {provider.name}</Empresa>
             </FormName>
 
             <FormCity>

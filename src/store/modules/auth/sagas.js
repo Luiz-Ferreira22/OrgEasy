@@ -20,7 +20,7 @@ export function* signIn({ payload }) {
 
     const tipoUsuario = user.tipo_usuario;
 
-    const provider = tipoUsuario !== 'Organizador' ? true: false;
+    const provider = tipoUsuario !== 'Fornecedor' ? true: false;
 
     console.tron.log('DADOS', user);
 
@@ -94,6 +94,53 @@ export function* signEmpresa({ payload }) {
   }
 }
 
+export function* signMesa({ payload }) {
+  console.tron.log('SignMesa', payload);
+  try {
+    const { name, cadeiras } = payload;
+     yield call(api.post, 'mesa', {
+      name,
+      cadeiras,
+    });
+
+    Alert.alert(
+      'Cadastrado com Sucesso',
+    );
+
+
+  }catch (err) {
+    Alert.alert(
+      'Falha no cadastro',
+      'Houve um erro no cadastro, verifique seus dados'
+    );
+    yield put(signFailure());
+  }
+}
+
+
+export function* signConvidado({ payload }) {
+  console.tron.log('SignConvidado', payload);
+  try {
+    const { name, sobre_nome } = payload;
+     yield call(api.post, 'convidados', {
+      name,
+      sobre_nome,
+    });
+
+    Alert.alert(
+      'Cadastrado com Sucesso',
+    );
+
+
+  }catch (err) {
+    Alert.alert(
+      'Falha no cadastro',
+      'Houve um erro no cadastro, verifique seus dados'
+    );
+    yield put(signFailure());
+  }
+}
+
 export function setToken({ payload }){
   if(!payload) return;
 
@@ -109,6 +156,9 @@ export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', signIn), // chama uma funcao toda vez que ouvir
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_UP_EMPRESA', signEmpresa),
+  takeLatest('@auth/SIGN_UP_MESA', signMesa),
+  takeLatest('@auth/SIGN_UP_CONVIDADO', signConvidado),
+
 
 
 ]);

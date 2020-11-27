@@ -25,7 +25,7 @@ export default function SignIn ({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loading = useSelector(state => state.auth.loading);
+ // const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
     console.tron.log(email, password);
@@ -62,7 +62,7 @@ export default function SignIn ({ navigation }) {
           onChangeText={setPassword}
           />
 
-          <SubmitButton loading={loading} onPress={handleSubmit}>Acessar</SubmitButton>
+          <SubmitButton  onPress={handleSubmit}>Acessar</SubmitButton>
 
       </Form>
 

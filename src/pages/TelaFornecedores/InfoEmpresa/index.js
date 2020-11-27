@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../../services/api';
 
+import ProviderAvatar from '../../../components/ProviderAvatar';
+
 import { useNavigation } from '@react-navigation/native';
 
 import { Container,
@@ -15,7 +17,6 @@ Voltar,
 Title,
 ScrollView,
 FormAvatar,
-Avatar,
 FormInput,
 Form,
 FormPicker,
@@ -29,6 +30,8 @@ export default function InfoEmpresa ({route}) {
 
   const { fornecedor } = route.params;
 
+  const [file, setFile] = useState('');
+
   const ramo = ["Buffet", "Automoveis", "Hoteis"];
 
   const [name, setName] = useState('');
@@ -40,6 +43,17 @@ export default function InfoEmpresa ({route}) {
   const onReturn = () => {
     navigation.goBack();
   };
+
+
+  useEffect(() => {
+    async function loadFile() {
+
+      const response = await api.get('users');
+      setFile(response.data);
+    }
+    loadFile();
+
+ },[file]);
 
   return (
     <Container>
@@ -58,12 +72,7 @@ export default function InfoEmpresa ({route}) {
       <ScrollView>
         <FormAvatar>
           <TouchableOpacity >
-          <Avatar
-          source={{
-            uri:
-            'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg'
-          }}
-          />
+          <ProviderAvatar />
           </TouchableOpacity>
         </FormAvatar>
 

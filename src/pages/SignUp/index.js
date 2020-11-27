@@ -27,7 +27,7 @@ ViewPicker,
 export default function SignIn ({ navigation }) {
 
   const dispatch = useDispatch();
-  const users = ["Usuario", "Organizador"];
+  const users = ["Noivos", "Cerimonialista", "Fornecedor"];
 
   const [ufs, setUfs] = useState(['']);
   const [citys, setCitys] = useState(['']);

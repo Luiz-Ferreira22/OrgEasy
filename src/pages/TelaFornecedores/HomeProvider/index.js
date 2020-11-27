@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 
 import api from '../../../services/api';
 
+import ProviderAvatar from '../../../components/ProviderAvatar';
 import Background from '../../../components/Background';
+
+
 
 import {
 Container,
@@ -34,8 +38,13 @@ FormIcon,
 
 export default function HomeProvider () {
 
+const profile = useSelector(state => state.user.profile);
+
   const navigation = useNavigation();
+
   const { params } = useRoute();
+
+  const [file, setFile] = useState('');
 
   const [fornecedor, setFornecedor] = useState();
 
@@ -48,23 +57,35 @@ export default function HomeProvider () {
     }
     loadProviders();
 
- },[]);
+ },[fornecedor]);
+
+
+ useEffect(() => {
+   async function loadFile() {
+
+     const response = await api.get('users');
+     setFile(response.data);
+   }
+   loadFile();
+
+},[file]);
 
   return (
   <Background>
     <Container>
       <FormAvatar>
-          <Button >
+          <Button>
           <Avatar
           source={{
-            uri:
-            'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg'
-          }}
+                uri: file
+                ? file.avatar.url :
+               'https://www.google.com/url?sa=i&url=https%3A%2F%2Fbr.pinterest.com%2Fmonicamuhlbauer%2Flogo-fotografia%2F&psig=AOvVaw1HrhjvOteY7jyo_awALPFY&ust=1606448836588000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDNs7qmn-0CFQAAAAAdAAAAABAQ',
+              }}
           />
           </Button>
           <FormTitle>
-          <Name>Luiz - </Name>
-          <Description>Fornecedor</Description>
+          <Name>{profile.name} - </Name>
+            <Description>{profile.tipo_usuario}</Description>
         </FormTitle>
         </FormAvatar>
 
@@ -77,8 +98,9 @@ export default function HomeProvider () {
               <Button onPress={() =>
                 navigation.navigate('InfoEmpresa', {fornecedor})} >
               <Image
-              source={{
-               uri:'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg',
+               source={{
+                uri:
+               'https://fastcorpbr.com/wp-content/uploads/2019/04/reforma-de-barbearia.jpg',
               }}
                >
             </Image>

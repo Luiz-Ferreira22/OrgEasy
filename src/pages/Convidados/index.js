@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-
-import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Background from '../../components/Background';
 import api from '../../services/api';
@@ -17,7 +15,6 @@ import {
   Button,
   Name,
   FormName,
-  IconDesc,
   Desc,
   FormDesc,
 
@@ -26,7 +23,10 @@ import {
 export default function Convidados (){
 
   const navigation = useNavigation();
-  const [mesas, setMesa] = useState();
+
+  const { params } = useRoute();
+
+  const [mesas, setMesa] = useState([]);
 
   useEffect(() => {
     async function loadMesa() {
@@ -35,6 +35,7 @@ export default function Convidados (){
 
       setMesa(response.data);
     }
+
     loadMesa();
 
  },[]);
@@ -49,13 +50,17 @@ export default function Convidados (){
 
         <OptionButton />
 
+        <Form>
+          <Title>Mesas</Title>
+        </Form>
+
           <FormList>
             <ScrollView
             data={mesas}
             keyExtractor={mesa => Object(mesa.id)}
             renderItem={({ item: mesa }) => (
               <Button onPress={() =>
-                navigation.navigate('ListaConvidados', {mesa})}>
+                navigation.navigate('ListaConvidados', { mesa })}>
 
                 <FormName>
                 <Name> Mesa - {mesa.name}</Name>

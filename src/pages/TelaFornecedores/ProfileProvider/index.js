@@ -6,6 +6,8 @@ import Background from '../../../components/Background';
 import { signOut } from '../../../store/modules/auth/actions';
 import { updateProfileRequest } from '../../../store/modules/user/actions';
 
+import api from '../../../services/api';
+
 import AvatarInput from '../../../components/AvatarInput';
 
 import {
@@ -56,9 +58,9 @@ export default function ProfileProvider (){
 
   return (
     <Background>
+        <AvatarInput />
       <Container >
-        <AvatarInput name="avatar"/>
-       <Form initialData={profile}>
+       <Form >
        <FormInput
           icon="person-outline"
           autoCorrect={false}
