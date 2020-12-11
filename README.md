@@ -1,6 +1,4 @@
-<h4 align="center">
-  OrgEasy
-</h4>
+# OrgEasy
 
 <p align="center">
   <img alt="BeTheHero" src="https://github.com/Luiz-Ferreira22/OrgEasy/blob/master/original.png" width="100%">
